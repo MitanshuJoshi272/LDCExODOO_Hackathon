@@ -10,8 +10,14 @@ const nav = [
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { pathname } = useLocation();
-  const { user, isLoggedIn, logout } = useAuth();
+  const { user, isLoggedIn, isLoading, logout } = useAuth();
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+
+  // While we're verifying an existing token with the backend, don't redirect
+  // yet — otherwise a logged-in user gets bounced to /login on every refresh.
+  if (isLoading) {
+    return null;
+  }
 
   // Layout level Auth guard
   if (!isLoggedIn) {
