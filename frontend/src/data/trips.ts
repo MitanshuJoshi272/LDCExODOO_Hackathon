@@ -9,7 +9,7 @@ export const seedTrips: Trip[] = [
   coverImage: "/a6579c30-2bd2-439f-938c-d223541de800.jpg",
 
   startDate: '2026-09-12',
-  budgetCap: 4200,
+  budgetCap: 350000,
   travelers: 2,
   isPublic: true,
   stops: [
@@ -20,7 +20,7 @@ export const seedTrips: Trip[] = [
     endDate: '2026-09-17',
     notes: 'Flat in Graça. Sintra on the first clear day.',
     activityIds: ['lis-1', 'lis-3', 'lis-4'],
-    transportCost: 480
+    transportCost: 40000
   },
   {
     id: 'stop-bcn',
@@ -29,7 +29,7 @@ export const seedTrips: Trip[] = [
     endDate: '2026-09-22',
     notes: 'Sagrada Família tickets already booked for the 18th.',
     activityIds: ['bcn-1', 'bcn-2', 'bcn-4'],
-    transportCost: 110
+    transportCost: 9100
   },
   {
     id: 'stop-mar',
@@ -38,7 +38,7 @@ export const seedTrips: Trip[] = [
     endDate: '2026-09-27',
     notes: 'Riad in the medina, desert night mid-stay.',
     activityIds: ['mar-1', 'mar-2', 'mar-3'],
-    transportCost: 145
+    transportCost: 12000
   }]
 
 },
@@ -49,7 +49,7 @@ export const seedTrips: Trip[] = [
   coverImage: "/f65db612-6fde-4265-b4d1-d7a28ba92b44.jpg",
 
   startDate: '2026-11-08',
-  budgetCap: 2600,
+  budgetCap: 215000,
   travelers: 1,
   isPublic: false,
   stops: [
@@ -60,7 +60,7 @@ export const seedTrips: Trip[] = [
     endDate: '2026-11-15',
     notes: 'Rail pass covers the day trips.',
     activityIds: ['kyo-1', 'kyo-2', 'kyo-4'],
-    transportCost: 890
+    transportCost: 74000
   }]
 
 }];

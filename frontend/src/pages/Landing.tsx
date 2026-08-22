@@ -109,7 +109,7 @@ export function Landing() {
                 Lisbon → Barcelona → Marrakech
               </p>
               <p className="mt-1 text-sm text-ink-soft">
-                Estimated {money(4085)} for two, {money(115)} under cap
+                Estimated {money(339000)} for two, {money(11000)} under cap
               </p>
             </figcaption>
           </motion.figure>

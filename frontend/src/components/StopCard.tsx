@@ -46,7 +46,7 @@ export function StopCard({
   // Search/Filter states inside StopCard activity section
   const [actQuery, setActQuery] = useState('');
   const [actCat, setActCat] = useState('All');
-  const [actCostLimit, setActCostLimit] = useState('All'); // 'All' | 'Free' | 'Under50' | '50Plus'
+  const [actCostLimit, setActCostLimit] = useState('All'); // 'All' | 'Free' | 'Under3000' | '3000Plus'
   const [hoveredActId, setHoveredActId] = useState<string | null>(null);
 
   if (!city) return null;
@@ -58,10 +58,10 @@ export function StopCard({
     let matchesCost = true;
     if (actCostLimit === 'Free') {
       matchesCost = a.cost === 0;
-    } else if (actCostLimit === 'Under50') {
-      matchesCost = a.cost > 0 && a.cost < 50;
-    } else if (actCostLimit === '50Plus') {
-      matchesCost = a.cost >= 50;
+    } else if (actCostLimit === 'Under3000') {
+      matchesCost = a.cost > 0 && a.cost < 3000;
+    } else if (actCostLimit === '3000Plus') {
+      matchesCost = a.cost >= 3000;
     }
     return matchesQuery && matchesCat && matchesCost;
   });
@@ -226,8 +226,8 @@ export function StopCard({
                 >
                   <option value="All">Any Price</option>
                   <option value="Free">Free Only</option>
-                  <option value="Under50">Under $50</option>
-                  <option value="50Plus">$50 and Over</option>
+                  <option value="Under3000">Under ₹3,000</option>
+                  <option value="3000Plus">₹3,000 and Over</option>
                 </select>
               </div>
             </div>

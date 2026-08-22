@@ -28,7 +28,7 @@ interface ActivityLog {
 const mockActivityLogs: ActivityLog[] = [
   { id: '1', user: 'Maya Rao', action: 'Created trip', details: 'Iberian Slow Loop', time: '5 mins ago' },
   { id: '2', user: 'John Doe', action: 'Added stop', details: 'Kyoto (4 nights)', time: '14 mins ago' },
-  { id: '3', user: 'Admin', action: 'Modified cost index', details: 'Rome lodging: $180', time: '1 hour ago' },
+  { id: '3', user: 'Admin', action: 'Modified cost index', details: 'Rome lodging: ₹15,000', time: '1 hour ago' },
   { id: '4', user: 'Sarah Jenkins', action: 'Duplicated shared plan', details: 'Copy of Iberian Slow Loop', time: '3 hours ago' },
   { id: '5', user: 'Maya Rao', action: 'Added activity', details: 'Fado & Tapas in Lisbon', time: '4 hours ago' }
 ];
@@ -136,10 +136,10 @@ export function AdminDashboard() {
           {/* SVG Custom Graph */}
           <div className="flex-1 min-h-[180px] flex items-end gap-5 border-b border-line-strong pb-4 px-2">
             {[
-              { cap: '< $1.5K', pct: totalTrips > 0 ? (trips.filter(t => t.budgetCap < 1500).length / totalTrips) * 100 : 20, count: trips.filter(t => t.budgetCap < 1500).length, fill: 'bg-pine' },
-              { cap: '$1.5K - $3K', pct: totalTrips > 0 ? (trips.filter(t => t.budgetCap >= 1500 && t.budgetCap <= 3000).length / totalTrips) * 100 : 40, count: trips.filter(t => t.budgetCap >= 1500 && t.budgetCap <= 3000).length, fill: 'bg-clay' },
-              { cap: '$3K - $5K', pct: totalTrips > 0 ? (trips.filter(t => t.budgetCap > 3000 && t.budgetCap <= 5000).length / totalTrips) * 100 : 25, count: trips.filter(t => t.budgetCap > 3000 && t.budgetCap <= 5000).length, fill: 'bg-gold' },
-              { cap: '> $5K', pct: totalTrips > 0 ? (trips.filter(t => t.budgetCap > 5000).length / totalTrips) * 100 : 15, count: trips.filter(t => t.budgetCap > 5000).length, fill: 'bg-ink-soft' }
+              { cap: '< ₹1 Lakh', pct: totalTrips > 0 ? (trips.filter(t => t.budgetCap < 100000).length / totalTrips) * 100 : 20, count: trips.filter(t => t.budgetCap < 100000).length, fill: 'bg-pine' },
+              { cap: '₹1L - ₹2.5L', pct: totalTrips > 0 ? (trips.filter(t => t.budgetCap >= 100000 && t.budgetCap <= 250000).length / totalTrips) * 100 : 40, count: trips.filter(t => t.budgetCap >= 100000 && t.budgetCap <= 250000).length, fill: 'bg-clay' },
+              { cap: '₹2.5L - ₹4L', pct: totalTrips > 0 ? (trips.filter(t => t.budgetCap > 250000 && t.budgetCap <= 400000).length / totalTrips) * 100 : 25, count: trips.filter(t => t.budgetCap > 250000 && t.budgetCap <= 400000).length, fill: 'bg-gold' },
+              { cap: '> ₹4 Lakh', pct: totalTrips > 0 ? (trips.filter(t => t.budgetCap > 400000).length / totalTrips) * 100 : 15, count: trips.filter(t => t.budgetCap > 400000).length, fill: 'bg-ink-soft' }
             ].map((bar, i) => (
               <div key={i} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end">
                 <span className="text-xs font-semibold text-ink-soft">{bar.count}</span>

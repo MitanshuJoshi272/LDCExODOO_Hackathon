@@ -189,7 +189,7 @@ export function TripDetail() {
             id="cap"
             type="number"
             min={0}
-            step={100}
+            step={1000}
             value={trip.budgetCap}
             onChange={(e) => updateTrip(trip.id, { budgetCap: Number(e.target.value) || 0 })}
             className="mt-1.5 w-full rounded-xl border border-line bg-paper px-3.5 py-2.5 text-sm focus:border-clay focus:outline-none"

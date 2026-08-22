@@ -10,8 +10,8 @@ export const cities: City[] = [
 
   blurb:
   'Temple gardens, tea houses and lantern-lit lanes. Slow mornings, early sunsets.',
-  lodgingPerNight: 96,
-  dailyLivingCost: 58,
+  lodgingPerNight: 8000,
+  dailyLivingCost: 4800,
   costIndex: 3,
   popularity: 94,
   tags: ['Temples', 'Food', 'Walkable']
@@ -25,8 +25,8 @@ export const cities: City[] = [
 
   blurb:
   'Tiled hills, tram lines and long dinners. Good value for a European capital.',
-  lodgingPerNight: 78,
-  dailyLivingCost: 45,
+  lodgingPerNight: 6500,
+  dailyLivingCost: 3750,
   costIndex: 2,
   popularity: 91,
   tags: ['Coastal', 'Nightlife', 'Budget']
@@ -40,8 +40,8 @@ export const cities: City[] = [
 
   blurb:
   'Riads, souks and desert day trips. Dense, loud and cheap once you are inside the walls.',
-  lodgingPerNight: 54,
-  dailyLivingCost: 32,
+  lodgingPerNight: 4500,
+  dailyLivingCost: 2650,
   costIndex: 1,
   popularity: 82,
   tags: ['Markets', 'Desert', 'Budget']
@@ -55,8 +55,8 @@ export const cities: City[] = [
 
   blurb:
   'A small city used as a launchpad for waterfalls, lava fields and northern lights.',
-  lodgingPerNight: 168,
-  dailyLivingCost: 96,
+  lodgingPerNight: 14000,
+  dailyLivingCost: 8000,
   costIndex: 5,
   popularity: 77,
   tags: ['Nature', 'Road trip', 'Cold']
@@ -70,8 +70,8 @@ export const cities: City[] = [
 
   blurb:
   'Mountain on one side, two oceans on the other. Wine country an hour inland.',
-  lodgingPerNight: 72,
-  dailyLivingCost: 40,
+  lodgingPerNight: 6000,
+  dailyLivingCost: 3300,
   costIndex: 2,
   popularity: 85,
   tags: ['Mountains', 'Wine', 'Coastal']
@@ -85,8 +85,8 @@ export const cities: City[] = [
 
   blurb:
   'Jacaranda streets, museum days and the best street food per dollar anywhere.',
-  lodgingPerNight: 64,
-  dailyLivingCost: 36,
+  lodgingPerNight: 5300,
+  dailyLivingCost: 3000,
   costIndex: 2,
   popularity: 89,
   tags: ['Food', 'Museums', 'Budget']
@@ -100,8 +100,8 @@ export const cities: City[] = [
 
   blurb:
   'Alpine lake town built around being outside. Everything costs a little more here.',
-  lodgingPerNight: 142,
-  dailyLivingCost: 78,
+  lodgingPerNight: 11800,
+  dailyLivingCost: 6500,
   costIndex: 4,
   popularity: 74,
   tags: ['Adventure', 'Lakes', 'Hiking']
@@ -115,8 +115,8 @@ export const cities: City[] = [
 
   blurb:
   'Modernist rooftops, beach afternoons and a city that eats late by default.',
-  lodgingPerNight: 104,
-  dailyLivingCost: 56,
+  lodgingPerNight: 8600,
+  dailyLivingCost: 4650,
   costIndex: 3,
   popularity: 93,
   tags: ['Beach', 'Architecture', 'Nightlife']
@@ -130,8 +130,8 @@ export const cities: City[] = [
 
   blurb:
   'Old Quarter chaos, lake mornings and the cheapest great meals on this list.',
-  lodgingPerNight: 38,
-  dailyLivingCost: 24,
+  lodgingPerNight: 3150,
+  dailyLivingCost: 2000,
   costIndex: 1,
   popularity: 80,
   tags: ['Street food', 'Budget', 'Old town']

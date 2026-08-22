@@ -12,9 +12,9 @@ export interface City {
   region: string;
   image: string;
   blurb: string;
-  /** Typical nightly lodging cost in USD */
+  /** Typical nightly lodging cost in INR */
   lodgingPerNight: number;
-  /** Typical daily food + local transport cost in USD */
+  /** Typical daily food + local transport cost in INR */
   dailyLivingCost: number;
   /** 1 = very affordable, 5 = very expensive */
   costIndex: number;

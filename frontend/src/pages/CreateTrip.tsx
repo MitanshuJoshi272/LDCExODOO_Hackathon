@@ -25,7 +25,7 @@ export function CreateTrip() {
   const [description, setDescription] = useState('');
   const [startDate, setStartDate] = useState(defaultStart);
   const [travelers, setTravelers] = useState(2);
-  const [budgetCap, setBudgetCap] = useState(3500);
+  const [budgetCap, setBudgetCap] = useState(250000);
   const [cityId, setCityId] = useState(location.state?.cityId ?? cities[0].id);
   const [nights, setNights] = useState(4);
   const [error, setError] = useState<string | null>(null);
@@ -144,12 +144,12 @@ export function CreateTrip() {
                 className="input"
               />
             </Field>
-            <Field label="Budget cap (USD)" htmlFor="budget">
+            <Field label="Budget cap (INR)" htmlFor="budget">
               <input
                 id="budget"
                 type="number"
                 min={0}
-                step={100}
+                step={5000}
                 value={budgetCap}
                 onChange={(e) => setBudgetCap(Number(e.target.value) || 0)}
                 className="input"

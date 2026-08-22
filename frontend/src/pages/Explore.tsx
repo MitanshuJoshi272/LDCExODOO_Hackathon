@@ -10,8 +10,8 @@ import type { ActivityCategory } from '../types/trip';
 const regions = ['All regions', 'Europe', 'Asia', 'Africa', 'Americas', 'Oceania'];
 const budgets = [
   { label: 'Any budget', max: 5 },
-  { label: 'Under $100 / day', max: 2 },
-  { label: 'Under $180 / day', max: 3 }
+  { label: 'Under ₹8,000 / day', max: 2 },
+  { label: 'Under ₹15,000 / day', max: 3 }
 ];
 
 const categoryStyles: Record<ActivityCategory, string> = {
