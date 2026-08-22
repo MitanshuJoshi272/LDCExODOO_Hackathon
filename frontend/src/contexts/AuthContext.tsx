@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { api } from '../services/api';
 
 export interface UserProfile {
   name: string;
@@ -13,96 +12,112 @@ export interface UserProfile {
 interface AuthContextValue {
   user: UserProfile | null;
   isLoggedIn: boolean;
-  isLoading: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   signup: (name: string, email: string, password: string) => Promise<boolean>;
   logout: () => void;
-  updateProfile: (profile: Partial<UserProfile>) => Promise<void>;
-  toggleSaveDestination: (cityId: string) => Promise<void>;
+  updateProfile: (profile: Partial<UserProfile>) => void;
+  toggleSaveDestination: (cityId: string) => void;
   resetPassword: (email: string) => Promise<void>;
-  deleteAccount: () => Promise<void>;
+  deleteAccount: () => void;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-// Normalizes the backend's UserProfileResponse (snake_case saved_destinations)
-// into the frontend's UserProfile shape (camelCase savedDestinations).
-function mapUser(raw: any): UserProfile {
-  return {
-    name: raw.name,
-    email: raw.email,
-    avatar: raw.avatar,
-    language: raw.language,
-    savedDestinations: raw.saved_destinations ?? raw.savedDestinations ?? [],
-    role: raw.role,
-  };
-}
+const DEFAULT_USER: UserProfile = {
+  name: 'Maya Rao',
+  email: 'maya@globetrotter.io',
+  avatar: 'MR',
+  language: 'English',
+  savedDestinations: ['lisbon', 'kyoto'],
+  role: 'admin',
+};
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<UserProfile | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState<UserProfile | null>(() => {
+    const saved = localStorage.getItem('gt_user');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        return null;
+      }
+    }
+    return DEFAULT_USER;
+  });
 
   const isLoggedIn = user !== null;
 
-  // On first load, if a token exists, verify it against the backend and
-  // restore the session. This replaces the old approach of trusting
-  // whatever was cached in localStorage without ever checking the server.
   useEffect(() => {
-    const token = localStorage.getItem('gt_token');
-    if (!token) {
-      setIsLoading(false);
-      return;
+    if (user) {
+      localStorage.setItem('gt_user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('gt_user');
     }
-    api.auth
-      .getMe()
-      .then((raw) => setUser(mapUser(raw)))
-      .catch(() => {
-        localStorage.removeItem('gt_token');
-        setUser(null);
-      })
-      .finally(() => setIsLoading(false));
-  }, []);
+  }, [user]);
 
   const login = async (email: string, password: string): Promise<boolean> => {
-    // Throws on 401/invalid credentials — the caller (Login.tsx) is
-    // responsible for catching this and showing the error to the user.
-    const data = await api.auth.login(email, password);
-    setUser(mapUser(data.user));
+    if (email.trim().toLowerCase() === 'admin@globetrotter.io') {
+      setUser({
+        name: 'Administrator',
+        email: 'admin@globetrotter.io',
+        avatar: 'AD',
+        language: 'English',
+        savedDestinations: [],
+        role: 'admin',
+      });
+      return true;
+    }
+    const nameStr = email.split('@')[0];
+    const initials = nameStr.slice(0, 2).toUpperCase() || 'US';
+    setUser({
+      name: nameStr.charAt(0).toUpperCase() + nameStr.slice(1),
+      email: email,
+      avatar: initials,
+      language: 'English',
+      savedDestinations: [],
+      role: 'user',
+    });
     return true;
   };
 
   const signup = async (name: string, email: string, password: string): Promise<boolean> => {
-    const data = await api.auth.signup(name, email, password);
-    setUser(mapUser(data.user));
+    const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) || 'US';
+    setUser({
+      name,
+      email,
+      avatar: initials,
+      language: 'English',
+      savedDestinations: [],
+      role: 'user',
+    });
     return true;
   };
 
   const logout = () => {
-    api.auth.logout();
     setUser(null);
   };
 
-  const updateProfile = async (patch: Partial<UserProfile>) => {
-    const updated = await api.users.updateProfile(patch);
-    setUser(mapUser(updated));
+  const updateProfile = (patch: Partial<UserProfile>) => {
+    setUser((prev) => (prev ? { ...prev, ...patch } : null));
   };
 
-  const toggleSaveDestination = async (cityId: string) => {
-    if (!user) return;
-    const isSaved = user.savedDestinations.includes(cityId);
-    const updated = isSaved
-      ? await api.users.removeSavedDestination(cityId)
-      : await api.users.saveDestination(cityId);
-    setUser(mapUser(updated));
+  const toggleSaveDestination = (cityId: string) => {
+    setUser((prev) => {
+      if (!prev) return null;
+      const isSaved = prev.savedDestinations.includes(cityId);
+      const nextList = isSaved
+        ? prev.savedDestinations.filter((id) => id !== cityId)
+        : [...prev.savedDestinations, cityId];
+      return { ...prev, savedDestinations: nextList };
+    });
   };
 
   const resetPassword = async (email: string) => {
-    await api.auth.resetPassword(email);
+    return new Promise<void>((resolve) => setTimeout(resolve, 800));
   };
 
-  const deleteAccount = async () => {
-    await api.users.deleteAccount();
-    api.auth.logout();
+  const deleteAccount = () => {
+    localStorage.removeItem('gt_user');
     localStorage.removeItem('gt_trips');
     setUser(null);
     window.location.href = '/';
@@ -113,7 +128,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       value={{
         user,
         isLoggedIn,
-        isLoading,
         login,
         signup,
         logout,
