@@ -25,6 +25,19 @@ export function Login() {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
   };
 
+  const handleQuickLogin = async () => {
+    setError(null);
+    setLoading(true);
+    try {
+      await login('maya@globetrotter.io', 'password');
+      navigate(from, { replace: true });
+    } catch (err) {
+      setError('Quick login failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -205,6 +218,18 @@ export function Login() {
               </button>
             </motion.form>
           </AnimatePresence>
+
+          {mode === 'login' && (
+            <div className="mt-6 border-t border-line pt-6">
+              <button
+                type="button"
+                onClick={handleQuickLogin}
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-ink py-3 text-sm font-semibold text-paper transition-colors hover:bg-ink-soft"
+              >
+                <span>Quick Log In as Maya Rao (Demo)</span>
+              </button>
+            </div>
+          )}
 
           <div className="mt-6 text-center text-sm">
             {mode === 'login' ? (
